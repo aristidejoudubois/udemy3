@@ -11,7 +11,9 @@ jobs:
           npm ci
           npm audit fix
       - name: Lint
-        run: npm run lint
+        run: |
+          npm run lint
+          npm init @eslint/config
       - name: Test code
         run: npm run test
       - name: Build code
