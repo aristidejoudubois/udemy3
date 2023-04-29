@@ -2,7 +2,7 @@ name: Handle issues
 on: 
   pull_request:
     types:
-      -opened
+      - opened
 jobs:
   output-info:
     runs-on: ubuntu-latest
