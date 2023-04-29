@@ -1,15 +1,25 @@
 name: 'get and cache dependencies'
 description: 'get dependencies via npm and cache them'
+#-------------------control if dependencies should be install no matter if they were cached before or not
+inputs:
+  caching:
+    description: 'Whether to cache depedencies or not.'
+    required: false
+    default: 'true'
+#-----------------------------------------------
 runs:
   using: 'composite'
   steps:
     - name: Cache dependencies
+#-----------------------------------if you put true use cache
+      if: inputs.caching == 'true'
       id: cache
       uses: actions/cache@v3
       with:
         path: node_modules
         key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+#----------------------------------------if dpendencies not in cache then install
     - name: Install dependencies
-      if: steps.cache.outputs.cache-hit != 'true'
+      if: steps.cache.outputs.cache-hit != 'true' || inputs.caching != 'true'
       run: npm ci
       shell: bash
