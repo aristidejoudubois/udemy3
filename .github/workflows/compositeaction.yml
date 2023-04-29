@@ -9,7 +9,7 @@ jobs:
         uses: actions/checkout@v3
       
       - name: load & cache dependencies
-        uses: ./.github/actions/cached-deps
+        uses: ./.github/actions/cached-deps/action.yml
         
       - name: Lint code
         run: npm run lint
@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v3
         
       - name: load & cache dependencies
-        uses: ./.github/actions/cached-deps   #aristidejoudubois/udemy3
+        uses: ./.github/actions/cached-deps   
         
       - name: Test code
         id: run-tests
