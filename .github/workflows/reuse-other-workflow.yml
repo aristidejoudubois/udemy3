@@ -25,6 +25,7 @@ jobs:
       - name: Test code
         id: run-tests
         run: npm run test
+#---------------------------------only install depedencies if there are not in the cache
       - name: Upload test report
         if: failure() && steps.run-tests.outcome == 'failure'
         uses: actions/upload-artifact@v3
