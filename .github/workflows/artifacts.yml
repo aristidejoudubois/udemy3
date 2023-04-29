@@ -17,7 +17,7 @@ jobs:
       - name: Build code
         run: npm run build
       - name: publish js filename
-        run: ./*.js -type f -execdir echo 'script-file={}' >> GITHUB_OUTPUT ';'
+        run: echo 'script-file=toto' >> GITHUB_OUTPUT
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
