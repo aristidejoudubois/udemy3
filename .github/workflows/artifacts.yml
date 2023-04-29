@@ -1,4 +1,4 @@
-name: Deployment Exercise 1
+name: artifact
 on: workflow_dispatch
 jobs:
   deploy:
