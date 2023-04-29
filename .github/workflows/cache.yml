@@ -1,0 +1,57 @@
+name: cache
+on: workflow_dispatch
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Get code
+        uses: actions/checkout@v3
+        
+      - name: cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm   #path that should be cached
+          key: deps-node-modules-${{ hashFiles('**/package-lock.json')}} #key to retrieve the cache and where is the cache
+          #package.json has all the depencies 
+           
+      - name: Install dependencies
+        run: npm ci
+      - name: Build code
+        run: npm run build
+  test:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Get code
+        uses: actions/checkout@v3
+        
+      - name: cache dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.npm   #path that should be cached
+        key: deps-node-modules-${{ hashFiles('**/package-lock.json')}} #key to retrieve the cache and where is the cache
+        #package.json has all the depencies 
+          
+      - name: Install dependencies
+        run: npm ci
+      - name: Test code
+        run: npm run test
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: cache dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.npm   #path that should
+        be cached
+        key: deps-node-modules-${{ hashFiles('**/package-lock.json')}} #key to retrieve the cache and where is the cache
+        #package.json has all the depencies 
+          
+      - name: Deploy code
+        run: echo "Deploying..."
