@@ -1,4 +1,4 @@
-name: artifact
+name: artifact-outputs
 on: workflow_dispatch
 jobs:
   build:
