@@ -1,7 +1,7 @@
 name: artifact
 on: workflow_dispatch
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Get code
@@ -19,6 +19,16 @@ jobs:
         with:
           name: dist-files   #name file to upload
           path: |
-            dist  
-            package.json
-     
+            dist  #file to upload
+            package.json   #file to upload
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get build artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: dist-files
+      - name: list contents
+        run: ls
+          
