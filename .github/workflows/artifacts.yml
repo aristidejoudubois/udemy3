@@ -17,10 +17,10 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: dist-files   #name file to upload
+          name: dist-files  
           path: |
-            dist  #file to upload
-            package.json   #file to upload
+            dist  
+            package.json   
   deploy:
     needs: build
     runs-on: ubuntu-latest
