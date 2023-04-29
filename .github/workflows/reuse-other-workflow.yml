@@ -10,6 +10,8 @@ jobs:
 #--------------------------------reuse other workflow from ./.github/actions/cached-deps
       - name: load & cache dependencies
         uses: ./.github/actions/cached-deps
+        with:
+          caching: 'false'   # we dont want cache reuse from other job on Lint job
 #--------------------------------------------------------------
       - name: Lint code
         run: npm run lint
