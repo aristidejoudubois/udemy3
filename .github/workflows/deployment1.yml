@@ -10,6 +10,7 @@ jobs:
         run: |
           npm ci
           npm audit fix
+          npm i --package-lock-only
       - name: Lint
         run: |
           npm run lint
