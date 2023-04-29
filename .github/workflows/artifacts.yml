@@ -3,6 +3,8 @@ on: workflow_dispatch
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      script-file: ${{ steps.publish.outputs.script-file }}
     steps:
       - name: Get code
         uses: actions/checkout@v3
@@ -14,6 +16,8 @@ jobs:
         run: npm run test
       - name: Build code
         run: npm run build
+      - name: publish js filename
+        run: find dist/assets/*.js -type f -execdir echo 'script-file={}' >> GITHUB_OUTPUT ';'
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
@@ -31,4 +35,5 @@ jobs:
           name: dist-files
       - name: list contents
         run: ls
-          
+      - name: Output filename
+        run: echo "${{ needs.build.outputs.script-file }}"
