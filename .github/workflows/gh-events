@@ -1,4 +1,4 @@
-name: Handle issues
+name: Events Demo1
 on: 
   pull_request:
     types:
